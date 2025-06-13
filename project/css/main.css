@@ -573,6 +573,7 @@ select:focus {
 #edit-answer-fields .answer-field input {
   flex: 1;
   padding: 0.4rem;
+  margin: 0.8rem auto auto auto;
 }
 
 /* 削除ボタン（編集モーダル内） */
@@ -581,6 +582,7 @@ select:focus {
   color: white;
   border: none;
   padding: 0.3rem 0.6rem;
+  margin: 0.8rem auto auto auto;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -613,7 +615,19 @@ select:focus {
   cursor: pointer;
 }
 
-.custom-modal .submit-btn:hover {
+.submit-modal {
+  margin-top: 1rem;
+  background-color: var(--base-color);
+  color: var(--sub-color);
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.custom-modal .submit-btn:hover,
+.submit-modal:hover {
   background-color: #00b398;
 }
 
@@ -636,4 +650,16 @@ select:focus {
 }
 .toggle.active .arrow {
   transform: rotate(90deg);
+}
+
+/* ドラッグハンドルの見た目 */
+.drag-handle {
+  cursor: grab;
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  user-select: none;
+}
+.drag-handle:active {
+  cursor: grabbing;
 }
