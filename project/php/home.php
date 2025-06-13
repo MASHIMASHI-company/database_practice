@@ -1,5 +1,5 @@
 <!DOCTYPE html>
- <link rel="stylesheet" href="main.css">
+ <link rel="stylesheet" href="../css/main.css">
 <html>
 
 <body>
@@ -10,7 +10,7 @@
       <a href="#" id="openSignIn" class="btnh">SIGN IN</a>
       <a href="#" id="openSignUp" class="btnh2">SIGN UP</a>
     </div>
-    <img src="Blue and White Modern Illustrative Thesis Defense Presentation.png" alt="Zebla Image" id = "shimauma">
+    <img src="../image/Blue and White Modern Illustrative Thesis Defense Presentation.png" alt="Zebla Image" id = "shimauma">
   </main>
 
   <?php include 'footer.php'; ?>
