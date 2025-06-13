@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+ <link rel="stylesheet" href="main.css">
 <html>
 
 <body>
   <?php include 'header.php'; ?>
 
   <main class="home">
-    <div class="user">
-      <a href="#" id="openSignIn" class="btn">SIGN IN</a>
-      <a href="#" id="openSignUp" class="btn">SIGN UP</a>
+    <div class="user1">
+      <a href="#" id="openSignIn" class="btnh">SIGN IN</a>
+      <a href="#" id="openSignUp" class="btnh2">SIGN UP</a>
     </div>
-    <img src="../image/zebla.png" alt="Zebla Image">
+    <img src="Blue and White Modern Illustrative Thesis Defense Presentation.png" alt="Zebla Image" id = "shimauma">
   </main>
 
   <?php include 'footer.php'; ?>
@@ -56,6 +57,5 @@
 
   <script src="../js/signin.js"></script>
 </body>
-
 
 </html>
