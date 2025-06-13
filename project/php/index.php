@@ -2,17 +2,19 @@
  <link rel="stylesheet" href="../css/main.css">
 <html>
 
-<body>
+<body class="no-scroll">
   <?php include 'header.php'; ?>
 
-  <main class="home">
-    <div class="user1">
-      <a href="#" id="openSignIn" class="btnh">SIGN IN</a>
-      <a href="#" id="openSignUp" class="btnh2">SIGN UP</a>
+  <main class="hero">
+    <div class="left">
+      <a href="#" id="openSignIn" class="btn">SIGN IN <span class="sign-arrow">➡︎</span></a>
+      <a href="#" id="openSignUp" class="btn">SIGN UP <span class="sign-arrow">➡︎</span></a>
     </div>
-    <img src="../image/Blue and White Modern Illustrative Thesis Defense Presentation.png" alt="Zebla Image" id = "shimauma">
+    <div class="right">
+      <img src="../image/Blue and White Modern Illustrative Thesis Defense Presentation.png" alt="Zebla Image" class= "zebra">
+      <div class="stripes"></div>
+    </div>
   </main>
-
   <?php include 'footer.php'; ?>
 
   <!-- Sign In モーダル -->
