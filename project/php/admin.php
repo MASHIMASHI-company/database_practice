@@ -56,10 +56,9 @@
         <span class="arrow">▶</span> HTML
     </div>
     <div class="aco-content html-aco">
-        HTMLの内容
+
     <div class="aco-actions">
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
+
     </div>
     </div>
 
@@ -67,22 +66,37 @@
         <span class="arrow">▶</span> CSS
     </div>
     <div class="aco-content css-aco">
-        CSSの内容
+
         <div class="aco-actions">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+
         </div>
     </div>
 
     <div class="toggle" data-target="js-aco">
         <span class="arrow">▶</span> JavaScript
     </div>
-    <div class="aco-content js-aco">JavaScriptの内容
-        <div class="aco-actions">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-        </div>
+    <div class="aco-content html-aco">
+  <div class="aco-item">
+    <!-- ここがドラッグハンドル -->
+    <span class="drag-handle">☰</span>
+
+    <!-- 既存のタイトル／説明／回答 -->
+    <div class="aco-title">既存のHTML問題タイトル</div>
+    <div class="aco-description">初期説明文</div>
+    <ul class="aco-answers">
+      <li>回答1</li>
+      <li>回答2</li>
+    </ul>
+
+    <!-- 編集＋削除ボタン -->
+    <div class="aco-actions">
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn">Delete</button>
     </div>
+  </div>
+  <!-- （複数あれば同じ構造で続ける） -->
+</div>
+
     </div>
 
     <!-- 編集モーダル -->
@@ -108,13 +122,13 @@
       <div id="edit-answer-fields">
   <div class="answer-field">
     <label>Answer.1:</label>
-    <input type="text" name="edit-answer[]" value="初期値" required>
+    <input type="text" name="edit-answer[]" value="" required>
     <button type="button" class="remove-btn">削除</button>
   </div>
   <!-- 以下追加されていく -->
 </div>
 
-      <button type="submit">保存</button>
+      <button class="submit-modal" type="submit">保存</button>
     </form>
   </div>
 </div>
@@ -122,6 +136,7 @@
 
 
     <?php include 'footer.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="../js/aco.js"></script>
     <script src="../js/edit-delete.js"></script>
 </body>
