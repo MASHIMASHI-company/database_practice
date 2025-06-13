@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     input.style.width = "100%";
     input.style.padding = "0.5rem";
     input.style.fontSize = "1rem";
+    input.style.boxSizing = "border-box";
     return input;
   }
 });

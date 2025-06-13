@@ -19,7 +19,7 @@
                     Q1
                 </div>
             </div>
-            <div class="problem-statement">
+            <div class="problem">
                 あいうえおかきくけこさしすせそたちつてとなにぬねのあいうえおかきくけこさしすせそたちつてとなにぬねの
             </div>
         </div>
