@@ -138,9 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("edit-description").value =
         item.querySelector(".aco-description").textContent;
       document.getElementById("edit-category").value = [
-        "html",
-        "css",
-        "javascript",
+        "HTML",
+        "CSS",
+        "JavaScript",
       ].find((v) =>
         item.closest(".aco-content").classList.contains(v + "-aco")
       );
