@@ -670,17 +670,17 @@ select:focus {
 .edit-modal {
   background-color: var(--sub-color);
   padding: 1rem 4rem;
+  width: 40%;
   border-radius: 5px;
   margin: 0 auto;
   overflow: scroll;
-  max-height: 35rem;
+  max-height: 90%;
 }
 
 .custom-close-btn {
   position: absolute;
-  top: 2rem;
-  left: 7rem;
-  width: 100rem;
+  left: 70%;
+  width: 10px;
 }
 
 .modal-update {
