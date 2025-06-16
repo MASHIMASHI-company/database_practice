@@ -688,85 +688,151 @@ select:focus {
 }
 
 /* ---- home--変更部分 -----*/
-/* .user1 {
+.no-scroll {
+  overflow: hidden;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 0 5vw;
+  position: relative;
+}
+
+.left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 800px;
-  transform: auto;
-  margin-right: 700px;
+  gap: 2.5rem;
+  margin-top: -8rem;
+  z-index: 2;
+  width: 40vw;
+  min-width: 300px;
 }
 
-.btnh,
-.btnh2 {
-  height: auto;
-  width: 20vw;
-  font-size: 4vw;
-  padding: 1vw 2vw;
-  background: white;
-  color: var(--base-color);
+.btn {
+  font-size: clamp(2rem, 6vw, 10rem);
+  color: var(--main-color);
   text-decoration: none;
   font-weight: bold;
-  border-radius: 10px;
-  text-align: center;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.btnh2 {
-  margin-right: 200px;
-}
-.btnh:hover,
-.btnh2:hover {
-  background: var(--base-color);
-  color: var(--sub-color);
-  transform: scale(1.05);
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  transition: transform 0.2s ease;
+  white-space: nowrap;
 }
 
-#shimauma {
-  z-index: -1;
-  width: 65vw;
-  height: 1000px;
-  right: -200px;
-  top: 0px;
+.btn .sign-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
-/* form {
+.btn:hover .sign-arrow {
+  transform: translateX(1rem);
+}
+
+.sign-arrow {
+  font-size: clamp(2rem, 6vw, 10rem);
+}
+
+#openSignIn {
+  margin-left: 6rem;
+}
+
+.right {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.zebra {
+  width: clamp(1000px, 100vw, 1000px);
+  height: auto;
+  z-index: 1;
+  position: relative;
+  left: 15%;
+  top: -13%;
+  object-fit: contain;
+}
+
+@media (max-width: 1200px) {
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .left {
+    width: 100%;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  #openSignIn {
+    margin-left: 0;
+  }
+
+  .right {
+    justify-content: center;
+  }
+
+  .zebra {
+    position: static;
+    max-height: 50vh;
+  }
+}
+
+.modal form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-} */
+}
 
-/* label {
+.modal form label {
   font-size: 1rem;
   font-weight: bold;
 }
 
-input {
+.modal form input {
   width: 100%;
   padding: 10px;
   border: 2px solid var(--base-color);
   border-radius: 6px;
   outline: none;
   transition: border-color 0.3s ease-in-out;
+  box-sizing: border-box;
 }
 
-input:focus {
+.modal form input:focus {
   border-color: var(--base-color);
 }
 
-/* ボタンのスタイル */
-/* button {
+.modal form button {
   background-color: var(--base-color);
   color: var(--sub-color);
-  padding: 12px 20px;
+  width: 6rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1rem;
+  white-space: nowrap;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-button:hover {
+.modal form button:hover {
   background-color: var(--base-color);
   transform: scale(1.05);
 }
