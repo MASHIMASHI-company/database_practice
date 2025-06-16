@@ -677,6 +677,10 @@ select:focus {
   height: 90%;
 }
 
+#edit-description {
+  width: 100%;
+}
+
 .custom-close-btn {
   position: absolute;
   top: 10%;

@@ -179,7 +179,7 @@ foreach ($rows as $r) {
       <input type="text" name="title" id="edit-title" required><br><br>
 
       <label>Description:</label><br>
-      <input type="text" name="description" id="edit-description" required><br><br>
+      <textarea name="description" rows="5" id="edit-description" required></textarea><br><br>
 
       <label>Category:</label><br>
       <select name="category" id="edit-category" required>
@@ -189,7 +189,6 @@ foreach ($rows as $r) {
       </select><br><br>
 
       <div class="answer">
-        <div>Answers:</div>
         <div id="edit-answer-fields"></div>
       </div><br>
 
