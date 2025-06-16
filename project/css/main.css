@@ -319,7 +319,7 @@ footer div {
   color: var(--base-color);
   width: 80%;
   margin: 70px auto;
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -353,6 +353,7 @@ footer div {
 
 #add-answer-btn {
   margin-top: 0.5rem;
+  margin-left: 45%;
   padding: 0.4rem 0.8rem;
   background-color: var(--base-color);
   color: var(--sub-color);
@@ -366,6 +367,7 @@ footer div {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .admin form {
@@ -402,7 +404,7 @@ select:focus {
 }
 
 .submit button {
-  padding: 0.6rem 1.2rem;
+  padding: 0.4rem 1rem;
   background-color: var(--base-color);
   color: var(--sub-color);
   font-size: 1rem;
@@ -412,6 +414,7 @@ select:focus {
   width: fit-content;
   align-self: flex-start;
   transition: background-color 0.3s ease;
+  margin-left: 90%;
 }
 
 .submit button:hover {
@@ -664,100 +667,118 @@ select:focus {
   cursor: grabbing;
 }
 
+.edit-modal {
+  background-color: var(--sub-color);
+  padding: 1rem 4rem;
+  border-radius: 5px;
+  margin: 0 auto;
+  overflow: scroll;
+  max-height: 35rem;
+}
+
+.custom-close-btn {
+  position: absolute;
+  top: 2rem;
+  left: 7rem;
+  width: 100rem;
+}
+
+.modal-update {
+  margin-right: 1rem;
+}
 
 /* ---- home--変更部分 -----*/
-.user1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 800px;
-    transform: auto;
-    margin-right: 700px;
+/* .user1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+  transform: auto;
+  margin-right: 700px;
 }
 
-.btnh, .btnh2 {
+.btnh,
+.btnh2 {
   height: auto;
-    width: 20vw;
-    font-size: 4vw;
-    padding: 1vw 2vw;
-    background: white;
-    color: var(--base-color);
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 10px;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 20vw;
+  font-size: 4vw;
+  padding: 1vw 2vw;
+  background: white;
+  color: var(--base-color);
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .btnh2 {
-   margin-right: 200px;
+  margin-right: 200px;
 }
-.btnh:hover, .btnh2:hover {
-    background: var(--base-color);
-    color: var(--sub-color);
-    transform: scale(1.05);
+.btnh:hover,
+.btnh2:hover {
+  background: var(--base-color);
+  color: var(--sub-color);
+  transform: scale(1.05);
 }
-
 
 #shimauma {
-    z-index: -1;
-    width: 65vw;
-    height: 1000px;
-    right: -200px;
-    top: 0px;
+  z-index: -1;
+  width: 65vw;
+  height: 1000px;
+  right: -200px;
+  top: 0px;
 }
 
+/* form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+} */
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-label {
-    font-size: 1rem;
-    font-weight: bold;
+/* label {
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 input {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid var(--base-color);
-    border-radius: 6px;
-    outline: none;
-    transition: border-color 0.3s ease-in-out;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--base-color);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
 }
 
 input:focus {
-    border-color: var(--base-color);
+  border-color: var(--base-color);
 }
 
 /* ボタンのスタイル */
-button {
-    background-color: var(--base-color);
-    color: var(--sub-color);
-    padding: 12px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+/* button {
+  background-color: var(--base-color);
+  color: var(--sub-color);
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 button:hover {
-    background-color: var(--base-color);
-    transform: scale(1.05);
+  background-color: var(--base-color);
+  transform: scale(1.05);
 }
 
 /* モーダル表示のアニメーション */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/*-------home.phpのスタイル変更終了-----*/
+/* @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}  */
