@@ -679,6 +679,7 @@ select:focus {
 
 .custom-close-btn {
   position: absolute;
+  top: 10%;
   left: 70%;
   width: 10px;
 }
