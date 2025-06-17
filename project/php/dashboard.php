@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 session_start();
 
 // ログインしていない場合の処理（今回はデモ用にユーザーIDを1に設定）
-// 本番環境では適切な認証処理を実装してください。
+// ※ 本番環境では適切な認証処理を実装してください。
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['user_id'] = 1;
 }
@@ -34,11 +34,11 @@ try {
 
 $user_id = $_SESSION['user_id'];
 
-// 全クイズ数の取得
+// 全クイズ数を取得
 $stmtTotal = $pdo->query("SELECT COUNT(*) AS total FROM quizzes");
 $total     = (int)$stmtTotal->fetch()['total'];
 
-// ユーザーの正解数の取得
+// ユーザーの正解数を取得
 $stmtCorrect = $pdo->prepare(
     "SELECT COUNT(*) AS correct
      FROM progress p

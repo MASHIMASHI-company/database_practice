@@ -25,17 +25,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $choice_id = $choice['id'];
 
-    // progressテーブルに挿入
-    $stmt = $pdo->prepare("INSERT INTO progress (user_id, choice_id) VALUES (:user_id, :choice_id)");
-    $stmt->execute([':user_id' => $user_id, ':choice_id' => $choice_id]);
+    // 既にそのクイズに回答済みかどうかをチェック（choicesテーブル経由）
+    $stmt = $pdo->prepare("SELECT p.id FROM progress p 
+                            JOIN choices c ON c.id = p.choice_id
+                            WHERE p.user_id = :user_id AND c.quiz_id = :quiz_id");
+    $stmt->execute([':user_id' => $user_id, ':quiz_id' => $quizId]);
+    $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($existing) {
+        // 回答済みなら更新
+        $stmt = $pdo->prepare("UPDATE progress SET choice_id = :choice_id, answered_at = NOW() WHERE id = :progress_id");
+        $stmt->execute([':choice_id' => $choice_id, ':progress_id' => $existing['id']]);
+    } else {
+        // 未回答なら新規に挿入
+        $stmt = $pdo->prepare("INSERT INTO progress (user_id, choice_id) VALUES (:user_id, :choice_id)");
+        $stmt->execute([':user_id' => $user_id, ':choice_id' => $choice_id]);
+    }
 
     echo json_encode(['success' => true]);
     exit;
 }
 
-// --- 以下 GET時のクイズ取得 ---
+// --- GETの場合：クイズデータ取得処理 ---
 
-// 仮ユーザーIDを固定（user_id = 1）
+// 仮ユーザーIDを固定（user_id = 1）※ 本番ではセッション管理等を実装してください
 $user_id = 1;
 
 // タグ取得
@@ -46,7 +59,7 @@ if (isset($_GET['tag'])) {
     exit;
 }
 
-// クイズと選択肢を取得
+// クイズと選択肢の取得（タグに沿った並び順で）
 $stmt_quiz = $pdo->prepare("SELECT * FROM quizzes WHERE tag = :tag ORDER BY id");
 $stmt_quiz->execute([':tag' => $quiz_tag]);
 $quizzes = $stmt_quiz->fetchAll(PDO::FETCH_ASSOC);
@@ -62,10 +75,11 @@ $stmt_choice = $pdo->prepare("SELECT * FROM choices WHERE quiz_id IN ($in_clause
 $stmt_choice->execute($quiz_ids);
 $choices = $stmt_choice->fetchAll(PDO::FETCH_ASSOC);
 
+// 組み立て（各問題に対して選択肢を連想配列で追加）
 $quiz_data = [];
 foreach ($quizzes as $quiz) {
     $quiz_data[$quiz['id']] = [
-        'id' => $quiz['id'],  // ← ここで問題IDを渡す
+        'id' => $quiz['id'],  // 問題IDとして渡す
         'content' => $quiz['content'],
         'choices' => []
     ];
@@ -82,13 +96,11 @@ $quiz_data_json = json_encode(array_values($quiz_data), JSON_HEX_TAG | JSON_HEX_
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <title>dashboard</title>
+    <title>Dashboard - <?php echo htmlspecialchars($quiz_tag); ?></title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
-
 <body>
     <?php include 'header.php'; ?>
     <main>
@@ -112,12 +124,12 @@ $quiz_data_json = json_encode(array_values($quiz_data), JSON_HEX_TAG | JSON_HEX_
     <script src="../js/sidebar.js"></script>
     <script src="../js/mordol.js"></script>
     <script src="../js/button.js"></script>
+    <script>
+      // クイズデータ、保存先URL、タグをJSに渡す
+      window.quizData = <?= $quiz_data_json ?>;
+      window.quizSaveUrl = '<?= basename(__FILE__) ?>';
+      window.quizTag = '<?= htmlspecialchars($quiz_tag); ?>';
+    </script>
+    <script src="../js/main.js"></script>
 </body>
-
 </html>
-<script>
-  window.quizData = <?= $quiz_data_json ?>;
-  window.quizSaveUrl = '<?= basename(__FILE__) ?>';
-  window.quizTag = '<?= htmlspecialchars($quiz_tag) ?>';
-</script>
-<script src="../js/main.js"></script>
