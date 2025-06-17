@@ -17,8 +17,8 @@ function renderQuestion(index) {
     optionsDiv.appendChild(label);
   });
 
-  document.querySelector('.level').textContent = `${index + 1}/${window.quizData.length}`;
   document.querySelector('.q').textContent = `Q${index + 1}`;
+  updateGauge(currentIndex + 1, window.quizData.length);
 }
 
 async function checkAndGo() {

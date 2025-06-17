@@ -149,11 +149,5 @@ $quiz_data_json = json_encode(array_values($quiz_data), JSON_HEX_TAG | JSON_HEX_
     </script>
     <script src="../js/main.js"></script>
     <script src="../js/progressbar.js"></script>
-    <script>
-        // PHPから取得した正解数と全クイズ数をJavaScriptに受け渡し、updateGauge()で進捗バー更新
-        const correct = <?php echo json_encode($correct); ?>;
-        const total   = <?php echo json_encode($total); ?>;
-        updateGauge(correct, total);
-    </script>
 </body>
 </html>
