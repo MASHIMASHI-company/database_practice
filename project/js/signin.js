@@ -19,14 +19,8 @@ openSignUp.addEventListener("click", (e) => {
 });
 
 // モーダルを閉じる
-closeSignIn.addEventListener(
-  "click",
-  () => (modalSignIn.style.display = "none")
-);
-closeSignUp.addEventListener(
-  "click",
-  () => (modalSignUp.style.display = "none")
-);
+closeSignIn.addEventListener("click", () => modalSignIn.style.display = "none");
+closeSignUp.addEventListener("click", () => modalSignUp.style.display = "none");
 
 // モーダル外をクリックしたら閉じる
 window.addEventListener("click", (e) => {
@@ -34,12 +28,13 @@ window.addEventListener("click", (e) => {
   if (e.target === modalSignUp) modalSignUp.style.display = "none";
 });
 
-// Optional: SignUp フォームでパスワード一致チェック
+// Sign Up フォームのパスワード一致チェック
 document.getElementById("formSignUp").addEventListener("submit", (e) => {
   const pw1 = document.getElementById("signup-password").value;
   const pw2 = document.getElementById("signup-password2").value;
+
   if (pw1 !== pw2) {
-    e.preventDefault();
+    e.preventDefault(); // フォーム送信を中断
     alert("パスワードが一致しません");
   }
 });
