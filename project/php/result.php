@@ -1,3 +1,40 @@
+<?php
+require_once __DIR__ . '/db_connect.php';
+
+$user_id = 1; // 仮ユーザー
+$tag = $_GET['tag'] ?? null;
+if (!$tag) {
+    header("Location: dashboard.php");
+    exit;
+}
+
+// そのタグの問題数を取得
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM quizzes WHERE tag = ?");
+$stmt->execute([$tag]);
+$totalQuestions = (int)$stmt->fetchColumn();
+
+// 最新の progress からその件数分取得
+$stmt = $pdo->prepare("
+    SELECT 
+        p.id AS progress_id,
+        q.id AS quiz_id,
+        q.content,
+        q.answer_index,
+        c.choice_text,
+        c.index_number
+    FROM progress p
+    JOIN choices c ON p.choice_id = c.id
+    JOIN quizzes q ON c.quiz_id = q.id
+    WHERE p.user_id = ? AND q.tag = ?
+    ORDER BY p.id DESC
+    LIMIT ?
+");
+$stmt->bindValue(1, $user_id, PDO::PARAM_INT);
+$stmt->bindValue(2, $tag, PDO::PARAM_STR);
+$stmt->bindValue(3, (int)$totalQuestions, PDO::PARAM_INT);
+$stmt->execute();
+$results = array_reverse($stmt->fetchAll());
+?>
 <!DOCTYPE html>
 <html>
 
@@ -13,17 +50,19 @@
         <div class="status-bar">
             <div class="level">0/20</div>
         </div>
-        <div class="question">
-            <div class="result" onclick="toggleAccordion()">
-                Q1 <span id="accordionArrow" class="arrow">▼</span>
+        <?php foreach ($results as $index => $row): ?>
+            <div class="question">
+                <div class="result" onclick="toggleAccordion(this)">
+                    QUESTION<?= $index + 1 ?> <span class="arrow">▼</span>
+                    <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
+                </div>
+                <div class="problem-statement">
+                    <?= htmlspecialchars($row['content']) ?><br>
+                    <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
+                    <?= htmlspecialchars($row['choice_text']) ?><br>
+                </div>
             </div>
-            <div class="problem-statement" id="problemContent">
-                あいうえおかきくけこさしすせそたちつてとなにぬねのあいうえおかきくけこさしすせそたちつてとなにぬねの
-            </div>
-        </div>
-        <div class="home-button-container">
-        <a class="fixed-button home-button" href="dashboard.php">Dash Board</a>
-        </div>
+        <?php endforeach; ?>
     </main>
     <?php include 'footer.php'; ?>
     <script src="../js/sidebar.js"></script>

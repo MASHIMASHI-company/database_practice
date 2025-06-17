@@ -1,11 +1,10 @@
-function toggleAccordion() {
-  const content = document.getElementById("problemContent");
-  const arrow = document.getElementById("accordionArrow");
+function toggleAccordion(clickedElem) {
+  const content = clickedElem.nextElementSibling;  // クリックされた要素の次の兄弟要素（問題文など）
+  const arrow = clickedElem.querySelector('.arrow');  // クリックされた要素内の矢印部分
 
   content.classList.toggle("open");
   arrow.classList.toggle("rotate");
 
-  // ▼ or ▲ 文字を切り替える場合（任意）
   if (content.classList.contains("open")) {
     arrow.textContent = "▲";
   } else {

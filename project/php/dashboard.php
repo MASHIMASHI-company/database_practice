@@ -15,13 +15,13 @@
         </div>
         <div class="buttons">
             <div class="button">
-                <a href="question.php">HTML</a>
+                <a href="question.php?tag=HTML">HTML</a>
             </div>
             <div class="button">
-                <a href="question.php">CSS</a>
+                <a href="question.php?tag=CSS">CSS</a>
             </div>
             <div class="button">
-                <a href="question.php">JavaScript</a>
+                <a href="question.php?tag=JavaScript">JavaScript</a>
             </div>
         </div>
     </main>
