@@ -46,10 +46,7 @@ $results = array_reverse($stmt->fetchAll());
 
 <body>
     <?php include 'header.php'; ?>
-    <main>
-        <div class="status-bar">
-            <div class="level">0/20</div>
-        </div>
+    <main class="result-page">
         <?php foreach ($results as $index => $row): ?>
             <div class="question">
                 <div class="result" onclick="toggleAccordion(this)">
