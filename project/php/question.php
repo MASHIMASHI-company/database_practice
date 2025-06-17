@@ -118,5 +118,6 @@ $quiz_data_json = json_encode(array_values($quiz_data), JSON_HEX_TAG | JSON_HEX_
 <script>
   window.quizData = <?= $quiz_data_json ?>;
   window.quizSaveUrl = '<?= basename(__FILE__) ?>';
+  window.quizTag = '<?= htmlspecialchars($quiz_tag) ?>';
 </script>
 <script src="../js/main.js"></script>

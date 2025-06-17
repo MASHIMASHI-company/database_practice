@@ -47,7 +47,7 @@ async function checkAndGo() {
   if (currentIndex < window.quizData.length) {
     renderQuestion(currentIndex);
   } else {
-    window.location.href = 'result.php';
+    window.location.href = 'result.php?tag=' + encodeURIComponent(window.quizTag);
   }
 }
 
