@@ -59,18 +59,35 @@ main {
   display: flex;
   justify-content: end;
 }
-main .level {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  border: solid 2px var(--base-color);
-  width: 30%;
-  padding: 0 1rem;
-  border-radius: 15px;
-  font-weight: bolder;
-  margin-top: 3rem;
-  margin-right: 2rem;
+
+.dashboard {
+  display: inline;
 }
+
+.status-bar {
+  margin-top: 5rem;
+  margin-left: 60%;
+  width: 30%;
+  background: #ececec;
+  border: 2px solid var(--base-color);
+  border-radius: 15px;
+  overflow: hidden;
+  background-image: linear-gradient(#86ffc6, #86ffc6);
+  background-repeat: no-repeat;
+  background-size: 0% 100%; /* 横幅 0% からスタート */
+  transition: background-size 0.4s ease;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.status-bar .level {
+  padding-right: 0.5rem;
+  box-sizing: border-box;
+  color: var(--base-color);
+  font-weight: bold;
+}
+
 main .button {
   font-size: clamp(4rem, 8vw, 10rem);
   padding-left: 3rem;

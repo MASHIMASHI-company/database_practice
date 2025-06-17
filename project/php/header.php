@@ -22,7 +22,7 @@
                 <li><a href="#">User Name</a></li>
                 <li><a href="#">Email Address</a></li>
                 <li><a href="#">Pass Word</a></li>
-                <li><a href="home.php">Log OUT</a></li>
+                <li><a href="index.php">Log OUT</a></li>
                 <li><a href="dashboard.php">Dash Board</a></li>
             </ul>
         </div>
