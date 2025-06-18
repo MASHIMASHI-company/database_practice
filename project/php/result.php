@@ -41,6 +41,7 @@ $results = array_reverse($stmt->fetchAll());
 <head>
     <meta charset="utf-8">
     <title>dashboard</title>
+    <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 

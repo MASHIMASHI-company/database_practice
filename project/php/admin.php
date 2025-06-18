@@ -153,6 +153,7 @@ foreach ($rows as $r) {
 <head>
   <meta charset="UTF-8">
   <title>Quiz 管理画面</title>
+  <link rel="icon" href="../image/icon.png">
   <link rel="stylesheet" href="project/css/main.css">
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>

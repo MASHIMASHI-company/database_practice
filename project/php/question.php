@@ -119,6 +119,7 @@ $quiz_data_json = json_encode(array_values($quiz_data), JSON_HEX_TAG | JSON_HEX_
 <head>
     <meta charset="utf-8">
     <title>Dashboard - <?php echo htmlspecialchars($quiz_tag); ?></title>
+    <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>

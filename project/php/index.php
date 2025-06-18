@@ -104,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 <head>
   <meta charset="utf-8">
   <title>Quiz App</title>
+  <link rel="icon" href="../image/icon.png">
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body class="no-scroll">

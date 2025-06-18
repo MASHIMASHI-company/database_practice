@@ -57,6 +57,7 @@ $levelText = "{$correct}/{$total}";
 <head>
     <meta charset="utf-8">
     <title>Dashboard</title>
+    <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
