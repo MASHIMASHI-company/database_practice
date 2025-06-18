@@ -1,3 +1,6 @@
+<?php
+$username = $_SESSION["username"];
+?>
 <!DOCTYPE html>
     <html>
     <head> 
@@ -7,7 +10,7 @@
     </head>
     <body>  
         <footer>
-            <div>PROGRAM</div>
+            <div><?=$username?></div>
         </footer>
     </body>
 </html>

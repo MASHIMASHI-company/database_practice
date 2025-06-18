@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalTitle = document.getElementById("modal-title");
   const closeButton = document.querySelector(".close-button");
   const form = document.getElementById("modal-form");
+  const saveButton = document.getElementById("save-button");
 
   const sidebarItems = document.querySelectorAll(".sidebar ul li");
 
@@ -12,10 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (["User Name", "Email Address", "Pass Word"].includes(text)) {
       item.addEventListener("click", () => {
         modalTitle.textContent = `${text} 編集`;
-        form.innerHTML = ""; // 以前の入力をクリア
+        form.innerHTML = ""; // 前回の入力内容クリア
 
         if (text === "Pass Word") {
-          // パスワードの場合：3つの入力フィールドを追加
+          // パスワード編集なら3つの入力フィールド
           form.appendChild(
             createInput("現在のパスワード", "current-password", "password")
           );
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             )
           );
         } else {
-          // それ以外は1つの入力フィールド
+          // その他の場合は1つの入力フィールド
           form.appendChild(
             createInput(`${text} を入力してください`, "single-input", "text")
           );
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // モーダルを閉じる処理
   closeButton.addEventListener("click", () => {
     modal.style.display = "none";
   });
@@ -49,6 +51,82 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === modal) {
       modal.style.display = "none";
     }
+  });
+
+  // 保存ボタン押下時の処理：フォーム内容をサーバー側にPOSTする
+  saveButton.addEventListener("click", () => {
+    const editType = modalTitle.textContent.replace(" 編集", "").trim();
+
+    // バリデーション
+    if (editType === "Pass Word") {
+      const currentPasswordElem = form.querySelector(
+        'input[name="current-password"]'
+      );
+      const newPasswordElem = form.querySelector('input[name="new-password"]');
+      const confirmPasswordElem = form.querySelector(
+        'input[name="confirm-password"]'
+      );
+
+      const currentPassword = currentPasswordElem
+        ? currentPasswordElem.value.trim()
+        : "";
+      const newPassword = newPasswordElem ? newPasswordElem.value.trim() : "";
+      const confirmPassword = confirmPasswordElem
+        ? confirmPasswordElem.value.trim()
+        : "";
+
+      // 新しいパスワードが5文字以上かどうかチェック
+      if (newPassword.length < 5) {
+        alert("新しいパスワードは5文字以上にしてください。");
+        return;
+      }
+
+      // 新しいパスワードと確認用パスワードが一致するかチェック
+      if (newPassword !== confirmPassword) {
+        alert("新しいパスワードと確認用パスワードが一致しません。");
+        return;
+      }
+
+      // ※ クライアント側だけでは「現在のパスワード」との一致は確認できないので、
+      // サーバー側で password_verify() を利用してチェックしてください。
+      // 単純に、現在のパスワードと新しいパスワードが同じ場合は変更しない例
+      if (currentPassword === newPassword) {
+        alert("新しいパスワードは現在のパスワードと異なるものにしてください。");
+        return;
+      }
+    } else if (editType === "Email Address") {
+      const emailElem = form.querySelector('input[name="single-input"]');
+      const email = emailElem ? emailElem.value.trim() : "";
+      // 簡易的なメール形式の正規表現チェック
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("正しいメールアドレスを入力してください。");
+        return;
+      }
+    }
+
+    // バリデーションパスの場合、フォームデータの送信に進む
+    const formData = new FormData(form);
+    formData.append("editType", editType);
+
+    fetch("update_db.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("データベース更新成功:", data);
+          modal.style.display = "none";
+        } else {
+          console.error("更新エラー:", data.error);
+          alert(`更新に失敗しました: ${data.error}`);
+        }
+      })
+      .catch((error) => {
+        console.error("ネットワークエラー:", error);
+        alert("通信エラーが発生しました。");
+      });
   });
 
   function createInput(placeholder, name, type = "text") {

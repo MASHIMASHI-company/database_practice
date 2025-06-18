@@ -9,7 +9,7 @@
     </head>
     <body>  
         <header>
-            <img src="../image/1c5a6078-b57d-47e9-b234-2022e121fab6.png">
+            <a href="dashboard.php"><img src="../image/1c5a6078-b57d-47e9-b234-2022e121fab6.png"></a>
             <div>MASHIMASHI COMPANY</div>
             <div class="hamburger-menu">
                 <div class="hamburger-line"></div>
