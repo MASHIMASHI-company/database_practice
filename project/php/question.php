@@ -12,7 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $quizId = (int)$input['quizId'];
     $choiceIndex = (int)$input['choiceIndex'];
-    $user_id = 1; // 仮ユーザーID（本来はセッション等から）
+    require_once 'auth.php';
+    login_required();
+    $user_id = $_SESSION["user_id"];
 
     // 選択肢IDを取得（quiz_id と index_number で特定）
     $stmt = $pdo->prepare("SELECT id FROM choices WHERE quiz_id = :quiz_id AND index_number = :index_number");
@@ -48,8 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // --- GETの場合：クイズデータ取得処理 ---
 
-// 仮ユーザーIDを固定（user_id = 1）※ 本番ではセッション管理等を実装してください
-$user_id = 1;
+require_once 'auth.php';
+login_required(); // セッションチェック
+$user_id = $_SESSION["user_id"];
 
 // タグ取得
 if (isset($_GET['tag'])) {
