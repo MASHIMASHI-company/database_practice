@@ -8,12 +8,12 @@ body {
   background-color: var(--sub-color);
   margin: 0;
   padding: 0;
-  font-family: "Luckiest Guy", "Potta One", system-ui;
+  font-family: "Potta One", system-ui;
   font-weight: 400;
   font-style: normal;
 }
 button {
-  font-family: "Luckiest Guy", "Potta One", system-ui;
+  font-family: "Potta One", system-ui;
   font-weight: 400;
   font-style: normal;
 }
