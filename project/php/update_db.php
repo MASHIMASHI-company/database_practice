@@ -66,6 +66,8 @@ try {
             "password" => $hashedPassword,
             "id"       => $_SESSION['user_id']
         ]);
+        // パスワード更新の場合は新たな値の返送は不要
+        $response = ["success" => true];
     } elseif ($editType === "User Name") {
         $name = $_POST["single-input"] ?? "";
         $stmt = $pdo->prepare("UPDATE users SET username = :username WHERE id = :id");
@@ -73,6 +75,10 @@ try {
             "username" => $name,
             "id"       => $_SESSION['user_id']
         ]);
+        // セッションのユーザーネームも更新
+        $_SESSION['username'] = $name;
+        // 更新後のユーザーネームをレスポンスにも含める
+        $response = ["success" => true, "new_username" => $name];
     } elseif ($editType === "Email Address") {
         $email = $_POST["single-input"] ?? "";
         // メール形式のバリデーション（サーバー側でも再確認）
@@ -85,12 +91,13 @@ try {
             "email" => $email,
             "id"    => $_SESSION['user_id']
         ]);
+        $response = ["success" => true];
     } else {
         echo json_encode(["success" => false, "error" => "不明な編集タイプ"]);
         exit;
     }
 
-    echo json_encode(["success" => true]);
+    echo json_encode($response);
 } catch (Exception $e) {
     echo json_encode(["success" => false, "error" => $e->getMessage()]);
 }

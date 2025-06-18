@@ -8,7 +8,14 @@ body {
   background-color: var(--sub-color);
   margin: 0;
   padding: 0;
-  font-weight: bold;
+  font-family: "Luckiest Guy", "Potta One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+button {
+  font-family: "Luckiest Guy", "Potta One", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 
 a {

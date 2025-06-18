@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // ※ クライアント側だけでは「現在のパスワード」との一致は確認できないので、
+      // ※ クライアント側では「現在のパスワード」との一致は確認できないので、
       // サーバー側で password_verify() を利用してチェックしてください。
       // 単純に、現在のパスワードと新しいパスワードが同じ場合は変更しない例
       if (currentPassword === newPassword) {
@@ -118,6 +118,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.success) {
           console.log("データベース更新成功:", data);
           modal.style.display = "none";
+
+          // ユーザーネーム編集の場合、更新された名前で表示を更新する
+          if (editType === "User Name" && data.new_username) {
+            // 例えば、footer内の<div>にユーザーネームが表示されていると仮定
+            const usernameDisplay = document.querySelector("footer div");
+            if (usernameDisplay) {
+              usernameDisplay.textContent = data.new_username;
+            }
+          }
         } else {
           console.error("更新エラー:", data.error);
           alert(`更新に失敗しました: ${data.error}`);
