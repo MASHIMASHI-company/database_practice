@@ -253,7 +253,9 @@ foreach ($rows as $r) {
   <?php endforeach ?>
 </div>
 
-<?php include 'footer.php'; ?>
+<footer>
+  <div></div>
+</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {

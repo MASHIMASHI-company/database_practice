@@ -1,11 +1,12 @@
-<?php
-?>
 <!DOCTYPE html>
     <html>
     <head> 
         <meta charset="utf-8"> 
         <title>dashboard</title>
         <link rel="stylesheet" href="../css/main.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Potta+One&display=swap" rel="stylesheet">
     </head>
     <body>  
         <header>
