@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__ . '/db_connect.php';
 
-$user_id = 1; // 仮ユーザー
+require_once 'auth.php';
+login_required(); // セッションチェック
+$user_id = $_SESSION["user_id"];
 $tag = $_GET['tag'] ?? null;
 if (!$tag) {
     header("Location: dashboard.php");
