@@ -732,9 +732,6 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  padding: 0 5vw;
   position: relative;
 }
 
@@ -743,6 +740,7 @@ select:focus {
   flex-direction: column;
   justify-content: center;
   gap: 2.5rem;
+  margin-left: 6rem;
   margin-top: -8rem;
   z-index: 2;
   width: 40vw;
@@ -750,7 +748,7 @@ select:focus {
 }
 
 .btn {
-  font-size: clamp(2rem, 6vw, 10rem);
+  font-size: clamp(3rem, 6vw, 10rem);
   color: var(--main-color);
   text-decoration: none;
   font-weight: bold;
@@ -771,7 +769,7 @@ select:focus {
 }
 
 .sign-arrow {
-  font-size: clamp(2rem, 6vw, 10rem);
+  font-size: clamp(3rem, 6vw, 10rem);
 }
 
 #openSignIn {
@@ -788,30 +786,36 @@ select:focus {
 }
 
 .zebra {
-  width: clamp(1000px, 100vw, 1000px);
+  width: clamp(700px, 150vw, 1200px);
   height: auto;
   z-index: 1;
   position: relative;
-  left: 15%;
-  top: -13%;
+  left: 25%;
+  top: 30%;
   object-fit: contain;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1320px) {
   .hero {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem 1rem;
+    padding: 2rem ;
     text-align: center;
   }
 
-  .left {
-    width: 100%;
-    align-items: center;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
+ .left {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin-left: 0;     
+  margin-top: 13rem;
+  margin-bottom: 2rem;
+  font-size: 4rem;          
+  height: 200px;           
+  text-align: center;       
+}
 
   #openSignIn {
     margin-left: 0;
@@ -824,6 +828,11 @@ select:focus {
   .zebra {
     position: static;
     max-height: 50vh;
+    display: none;
+  }
+
+  .btn {
+    gap: 1.5rem;
   }
 }
 
@@ -913,6 +922,7 @@ select:focus {
   }
   .modal-content {
     width: 70%;
+    max-width: 250px;
   }
   .submit button {
     margin-left: 75%;
