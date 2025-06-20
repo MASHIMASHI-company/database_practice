@@ -730,9 +730,9 @@ select:focus {
 
 .hero {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: relative;
+  min-height: 100vh;
 }
 
 .left {
@@ -786,7 +786,7 @@ select:focus {
 }
 
 .zebra {
-  width: clamp(700px, 150vw, 1200px);
+  width: clamp(700px, 150vw, 1000px);
   height: auto;
   z-index: 1;
   position: relative;
@@ -795,10 +795,9 @@ select:focus {
   object-fit: contain;
 }
 
-@media (max-width: 1320px) {
+@media (max-width: 1220px) {
   .hero {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 2rem ;
     text-align: center;
