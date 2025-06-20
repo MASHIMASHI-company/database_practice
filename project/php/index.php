@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
       <a href="#" id="openSignUp" class="btn">SIGN UP <span class="sign-arrow">➡︎</span></a>
     </div>
     <div class="right">
-      <img src="../image/Blue and White Modern Illustrative Thesis Defense Presentation.png" alt="Quiz App Image" class="zebra">
+      <img src="../image/zebla.png" alt="Quiz App Image" class="zebra">
       <div class="stripes"></div>
     </div>
   </main>

@@ -786,13 +786,13 @@ select:focus {
 }
 
 .zebra {
-  width: clamp(500px, 150vw, 800px);
+  max-width: 80%;
+  height: auto;
+  display: block;
   height: auto;
   z-index: 1;
-  position: relative;
-  left: 25%;
-  top: 30%;
   object-fit: contain;
+  padding-left: 6rem;
 }
 
 @media (max-width: 1220px) {
