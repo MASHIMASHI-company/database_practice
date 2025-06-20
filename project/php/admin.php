@@ -75,7 +75,7 @@ if (isset($_GET['action'])) {
         throw new Exception('入力を確認してください');
       }
 
-      // quizzes 更新に answer_index を追加
+      // quizzes 更新
       $pdo->prepare(
         "UPDATE quizzes
            SET title        = ?,
@@ -224,7 +224,7 @@ foreach ($rows as $r) {
   </div>
 </div>
 
-<!-- 質問一覧 -->
+<!-- 編集一覧 -->
 <div class="admin-aco">
   <?php foreach (['HTML'=>'HTML','CSS'=>'CSS','JavaScript'=>'JavaScript'] as $key=>$label): ?>
     <div class="toggle" data-target="<?= $key ?>-aco">
