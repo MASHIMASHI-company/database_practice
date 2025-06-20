@@ -121,8 +121,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
       <div class="stripes"></div>
     </div>
   </main>
-
-  <?php include 'footer.php'; ?>
+  
+  <footer>
+      <div></div>
+  </footer>
 
   <!-- Sign In モーダル -->
   <div id="modalSignIn" class="modal">
