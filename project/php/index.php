@@ -122,9 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     </div>
   </main>
 
-  <footer>
-    <div></div>
-  </footer>
+  <?php include 'footer.php'; ?>
 
   <!-- Sign In モーダル -->
   <div id="modalSignIn" class="modal">
@@ -176,17 +174,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
         <input type="hidden" name="action" value="signup">
         <label for="signup-username">Username:</label>
         <input type="text" id="signup-username" name="username" required>
-        <br>
         <label for="signup-email">Email:</label>
         <input type="email" id="signup-email" name="email" required>
-        <br>
         <label for="signup-password">Password:</label>
         <!-- HTML5 の minlength 属性でブラウザ側の簡易チェックも -->
         <input type="password" id="signup-password" name="password" minlength="5" required>
-        <br>
         <label for="signup-password2">Confirm Password:</label>
         <input type="password" id="signup-password2" name="password2" required>
-        <br>
         <button type="submit">Sign Up</button>
       </form>
     </div>
