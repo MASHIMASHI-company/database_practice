@@ -2,7 +2,7 @@ let currentIndex = 0;
 
 function renderQuestion(index) {
   const quiz = window.quizData[index];
-  document.getElementById('problem-statement').textContent = quiz.content;
+  document.getElementById('problem-statement').innerHTML = quiz.content;
 
   const optionsDiv = document.getElementById('options');
   optionsDiv.innerHTML = '';
@@ -19,6 +19,8 @@ function renderQuestion(index) {
 
   document.querySelector('.q').textContent = `Q${index + 1}`;
   updateGauge(currentIndex + 1, window.quizData.length);
+
+  Prism.highlightAll();
 }
 
 async function checkAndGo() {
