@@ -44,6 +44,11 @@ $results = array_reverse($stmt->fetchAll());
     <meta charset="utf-8">
     <title>dashboard</title>
     <link rel="stylesheet" href="../css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-okaidia.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
 </head>
 
 <body>
@@ -56,7 +61,7 @@ $results = array_reverse($stmt->fetchAll());
                     <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
                 </div>
                 <div class="problem-statement">
-                    <?= htmlspecialchars($row['content']) ?><br>
+                    <?= $row['content'] ?>
                     <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
                     <?= htmlspecialchars($row['choice_text']) ?><br>
                 </div>

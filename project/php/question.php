@@ -120,6 +120,11 @@ $quiz_data_json = json_encode(array_values($quiz_data), JSON_HEX_TAG | JSON_HEX_
     <meta charset="utf-8">
     <title>Dashboard - <?php echo htmlspecialchars($quiz_tag); ?></title>
     <link rel="stylesheet" href="../css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-okaidia.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
 </head>
 <body>
     <?php include 'header.php'; ?>
