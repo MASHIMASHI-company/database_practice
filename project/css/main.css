@@ -308,7 +308,7 @@ footer div {
 }
 
 .problem-statement.open {
-  max-height: 300px;
+  max-height: 100%;
   padding: 1rem;
 }
 .arrow {
@@ -317,10 +317,11 @@ footer div {
   transition: transform 0.3s ease;
   display: inline-block;
   cursor: pointer;
+  transform: rotate(-90deg);
 }
 
 .arrow.rotate {
-  transform: rotate(90deg); /* ▼ → ▲にアニメーション */
+  transform: rotate(60deg);
 }
 
 .home img {
@@ -928,5 +929,8 @@ select:focus {
   }
   .q {
     font-size: 3rem;
+  }
+  .options {
+    grid-template-columns: 1fr;
   }
 }
