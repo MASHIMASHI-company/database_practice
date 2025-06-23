@@ -930,3 +930,11 @@ select:focus {
     font-size: 3rem;
   }
 }
+@media(max-height:700px){
+ .modal-content{
+  margin: auto;
+ }
+ .modal form{
+  gap: 0.4rem;
+ }
+}
