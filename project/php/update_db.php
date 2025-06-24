@@ -91,7 +91,10 @@ try {
             "email" => $email,
             "id"    => $_SESSION['user_id']
         ]);
-        $response = ["success" => true];
+
+        // セッションのメールアドレスも更新
+        $_SESSION['email'] = $email;
+        $response = ["success" => true, "new_email" => $email];
     } else {
         echo json_encode(["success" => false, "error" => "不明な編集タイプ"]);
         exit;

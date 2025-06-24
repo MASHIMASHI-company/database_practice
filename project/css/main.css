@@ -311,6 +311,7 @@ footer div {
   max-height: 100%;
   padding: 1rem;
 }
+
 .arrow {
   margin-left: 0.5rem;
   font-size: 1.3rem;
@@ -934,11 +935,11 @@ select:focus {
     grid-template-columns: 1fr;
   }
 }
-@media(max-height:700px){
- .modal-content{
-  margin: auto;
- }
- .modal form{
-  gap: 0.4rem;
- }
+@media (max-height: 700px) {
+  .modal-content {
+    margin: auto;
+  }
+  .modal form {
+    gap: 0.4rem;
+  }
 }

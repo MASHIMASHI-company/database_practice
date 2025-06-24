@@ -7,36 +7,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sidebarItems = document.querySelectorAll(".sidebar ul li");
 
+  const sideModal = (text) => {
+    form.innerHTML = ""; // 前回の入力内容クリア
+
+    if (text === "Pass Word") {
+      // パスワード編集なら3つの入力フィールド
+      form.appendChild(
+        createInput("現在のパスワード", "current-password", "password")
+      );
+      form.appendChild(
+        createInput("新しいパスワード", "new-password", "password")
+      );
+      form.appendChild(
+        createInput("新しいパスワード（確認）", "confirm-password", "password")
+      );
+    } else {
+      // その他の場合は1つの入力フィールド
+      const placeholderText = `${text} を入力してください`;
+      const inputElem = createInput(placeholderText, "single-input", "text");
+
+      // User Name の場合は、現在のユーザーネームをデフォルト値として設定
+      if (text === "User Name") {
+        inputElem.value = SESSION_USERNAME || ""; // SESSION_USERNAME はサーバー側で設定された変数
+      } else if (text === "Email Address") {
+        inputElem.value = SESSION_EMAIL || ""; // SESSION_EMAIL はサーバー側で設定された変数
+      }
+
+      form.appendChild(inputElem);
+    }
+  };
+
   sidebarItems.forEach((item) => {
     const text = item.textContent.trim();
 
     if (["User Name", "Email Address", "Pass Word"].includes(text)) {
       item.addEventListener("click", () => {
         modalTitle.textContent = `${text} 編集`;
-        form.innerHTML = ""; // 前回の入力内容クリア
-
-        if (text === "Pass Word") {
-          // パスワード編集なら3つの入力フィールド
-          form.appendChild(
-            createInput("現在のパスワード", "current-password", "password")
-          );
-          form.appendChild(
-            createInput("新しいパスワード", "new-password", "password")
-          );
-          form.appendChild(
-            createInput(
-              "新しいパスワード（確認）",
-              "confirm-password",
-              "password"
-            )
-          );
-        } else {
-          // その他の場合は1つの入力フィールド
-          form.appendChild(
-            createInput(`${text} を入力してください`, "single-input", "text")
-          );
-        }
-
+        sideModal(text);
         modal.style.display = "block";
       });
     }
@@ -125,7 +132,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const usernameDisplay = document.querySelector("footer div");
             if (usernameDisplay) {
               usernameDisplay.textContent = data.new_username;
+              SESSION_USERNAME = data.new_username; // セッション変数も更新
+              sideModal(editType); // モーダルの内容も更新
             }
+          } else if (editType === "Email Address" && data.new_email) {
+            // Email Address の場合も同様に更新
+
+            SESSION_EMAIL = data.new_email; // セッション変数も更新
+            sideModal(editType); // モーダルの内容も更新
           }
         } else {
           console.error("更新エラー:", data.error);

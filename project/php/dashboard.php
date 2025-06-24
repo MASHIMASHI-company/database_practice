@@ -51,6 +51,10 @@ $correct   = (int)$stmtCorrect->fetch()['correct'];
 
 // 表示用テキスト（例："5/30"）
 $levelText = "{$correct}/{$total}";
+
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
+
 ?>
 <!DOCTYPE html>
 <html>
