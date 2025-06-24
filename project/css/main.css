@@ -164,7 +164,9 @@ footer div {
 }
 
 .modal {
-  display: none;
+  display:none;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 2000;
   left: 0;
@@ -173,6 +175,9 @@ footer div {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
+}
+.show{
+  display: flex;
 }
 
 .modal-content {
@@ -934,11 +939,4 @@ select:focus {
     grid-template-columns: 1fr;
   }
 }
-@media(max-height:700px){
- .modal-content{
-  margin: auto;
- }
- .modal form{
-  gap: 0.4rem;
- }
-}
+
