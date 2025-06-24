@@ -37,19 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         }
 
-        modal.style.display = "block";
+        modal.classList.add("show");
       });
     }
   });
 
   // モーダルを閉じる処理
   closeButton.addEventListener("click", () => {
-    modal.style.display = "none";
+    modal.classList.remove("show");
   });
 
   window.addEventListener("click", (e) => {
     if (e.target === modal) {
-      modal.style.display = "none";
+      modal.classList.remove("show");
     }
   });
 
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         if (data.success) {
           console.log("データベース更新成功:", data);
-          modal.style.display = "none";
+          modal.classList.remove("show");
 
           // ユーザーネーム編集の場合、更新された名前で表示を更新する
           if (editType === "User Name" && data.new_username) {
