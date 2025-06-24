@@ -23,13 +23,29 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     } else {
       // その他の場合は1つの入力フィールド
-      form.appendChild(
-        createInput(`${text} を入力してください`, "single-input", "text")
-      );
-    }
+      const placeholderText = `${text} を入力してください`;
+      const inputElem = createInput(placeholderText, "single-input", "text");
 
-    modal.style.display = "block";
+      if (text === "User Name") {
+        inputElem.value = SESSION_USERNAME || ""; // セッション変数からユーザーネームを取得
+      } else if (text === "Email Address") {
+        inputElem.value = SESSION_EMAIL || ""; // セッション変数からメールアドレスを取得
+      }
+      form.appendChild(inputElem);
+    }
   };
+
+  sidebarItems.forEach((item) => {
+    const text = item.textContent.trim();
+
+    if (["User Name", "Email Address", "Pass Word"].includes(text)) {
+      item.addEventListener("click", () => {
+        modalTitle.textContent = `${text} 編集`;
+        sideModal(text);
+        modal.classList.add("show");
+      });
+    }
+  });
 
   // モーダルを閉じる処理
   closeButton.addEventListener("click", () => {
@@ -119,7 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           } else if (editType === "Email Address" && data.new_email) {
             // Email Address の場合も同様に更新
-
             SESSION_EMAIL = data.new_email; // セッション変数も更新
             sideModal(editType); // モーダルの内容も更新
           }
