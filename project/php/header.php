@@ -1,3 +1,7 @@
+<?php
+    // $username = $_SESSION["username"];
+    // $email = $_SESSION["email"];
+?>
 <!DOCTYPE html>
     <html>
     <head> 
@@ -38,5 +42,9 @@
                 <button id="save-button">保存</button>
             </div>
         </div>
+        <script>
+            let SESSION_USERNAME = <?= json_encode($username); ?>;
+            let SESSION_EMAIL = <?= json_encode($email); ?>;
+        </script>
     </body>
 </html>

@@ -79,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
                     // 登録成功後は自動ログインしてダッシュボードへリダイレクト
                     $_SESSION["user_id"] = $pdo->lastInsertId();
                     $_SESSION["username"] = $username;
+                    $_SESSION["email"] = $email;
                     header("Location: dashboard.php");
                     exit();
                 } catch (PDOException $e) {
@@ -93,12 +94,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
         $username = trim($_POST["username"]);
         $password = $_POST["password"];
 
-        $stmt = $pdo->prepare("SELECT id, username, password_hash FROM users WHERE username = ?");
+        $stmt = $pdo->prepare("SELECT id, username, email, password_hash FROM users WHERE username = ?");
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user && password_verify($password, $user["password_hash"])) {
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["username"] = $user["username"];
+            $_SESSION["email"] = $user["email"];
             header("Location: dashboard.php");
             exit();
         } else {

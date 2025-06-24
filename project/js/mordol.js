@@ -7,40 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sidebarItems = document.querySelectorAll(".sidebar ul li");
 
-  sidebarItems.forEach((item) => {
-    const text = item.textContent.trim();
+  const sideModal = (text) => {
+    form.innerHTML = ""; // 前回の入力内容クリア
 
-    if (["User Name", "Email Address", "Pass Word"].includes(text)) {
-      item.addEventListener("click", () => {
-        modalTitle.textContent = `${text} 編集`;
-        form.innerHTML = ""; // 前回の入力内容クリア
-
-        if (text === "Pass Word") {
-          // パスワード編集なら3つの入力フィールド
-          form.appendChild(
-            createInput("現在のパスワード", "current-password", "password")
-          );
-          form.appendChild(
-            createInput("新しいパスワード", "new-password", "password")
-          );
-          form.appendChild(
-            createInput(
-              "新しいパスワード（確認）",
-              "confirm-password",
-              "password"
-            )
-          );
-        } else {
-          // その他の場合は1つの入力フィールド
-          form.appendChild(
-            createInput(`${text} を入力してください`, "single-input", "text")
-          );
-        }
-
-        modal.classList.add("show");
-      });
+    if (text === "Pass Word") {
+      // パスワード編集なら3つの入力フィールド
+      form.appendChild(
+        createInput("現在のパスワード", "current-password", "password")
+      );
+      form.appendChild(
+        createInput("新しいパスワード", "new-password", "password")
+      );
+      form.appendChild(
+        createInput("新しいパスワード（確認）", "confirm-password", "password")
+      );
+    } else {
+      // その他の場合は1つの入力フィールド
+      form.appendChild(
+        createInput(`${text} を入力してください`, "single-input", "text")
+      );
     }
-  });
+
+    modal.style.display = "block";
+  };
 
   // モーダルを閉じる処理
   closeButton.addEventListener("click", () => {
@@ -125,7 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const usernameDisplay = document.querySelector("footer div");
             if (usernameDisplay) {
               usernameDisplay.textContent = data.new_username;
+              SESSION_USERNAME = data.new_username; // セッション変数も更新
+              sideModal(editType); // モーダルの内容も更新
             }
+          } else if (editType === "Email Address" && data.new_email) {
+            // Email Address の場合も同様に更新
+
+            SESSION_EMAIL = data.new_email; // セッション変数も更新
+            sideModal(editType); // モーダルの内容も更新
           }
         } else {
           console.error("更新エラー:", data.error);

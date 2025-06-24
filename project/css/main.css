@@ -164,7 +164,7 @@ footer div {
 }
 
 .modal {
-  display:none;
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -176,7 +176,7 @@ footer div {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
-.show{
+.show {
   display: flex;
 }
 
@@ -316,6 +316,7 @@ footer div {
   max-height: 100%;
   padding: 1rem;
 }
+
 .arrow {
   margin-left: 0.5rem;
   font-size: 1.3rem;
@@ -939,4 +940,3 @@ select:focus {
     grid-template-columns: 1fr;
   }
 }
-
