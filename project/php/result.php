@@ -63,7 +63,7 @@ $results = array_reverse($stmt->fetchAll());
                     <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
                     <?= htmlspecialchars($row['title']) ?>
                 </div>
-                <div class="problem-statement">
+                <div class="result-statement">
                     <?= $row['content'] ?>
                     <?php if (stripos($row['content'], '<pre') === false): ?>
                         <br>

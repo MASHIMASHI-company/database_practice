@@ -311,6 +311,21 @@ footer div {
   margin-top: 0.5rem;
 }
 
+.problem-statement.open {
+  max-height: 100%;
+  padding: 1rem;
+}
+
+.result-statement {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  background-color: #f4f4f4;
+  padding: 0 1rem;
+  border-left: 3px solid var(--base-color);
+  margin-top: 0.5rem;
+}
+
 .arrow {
   margin-left: 0.5rem;
   font-size: 1.3rem;
