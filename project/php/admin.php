@@ -209,7 +209,7 @@ foreach ($rows as $r) {
 <!-- 編集一覧 -->
 <div class="admin-aco">
   <?php foreach (['HTML'=>'HTML','CSS'=>'CSS','JavaScript'=>'JavaScript'] as $key=>$label): ?>
-    <div class="toggle" data-target="<?= $key ?>-aco">
+    <div class="toggle" data-target="<?= $key ?>-aco" onclick="toggleAccordion(this)">
       <span class="arrow">▶</span> <?= $label ?>
     </div>
     <div class="aco-content <?= $key ?>-aco">
@@ -240,6 +240,6 @@ foreach ($rows as $r) {
 </footer>
 
 <script src="../js/admin.js"></script>
-<script src="../js/acoordion.js"></script>
+<script src="../js/accordion.js"></script>
 </body>
 </html>

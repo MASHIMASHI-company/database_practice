@@ -323,11 +323,14 @@ footer div {
   transition: transform 0.3s ease;
   display: inline-block;
   cursor: pointer;
-  transform: rotate(-90deg);
+  margin-right: 0.5rem;
 }
 
 .arrow.rotate {
-  transform: rotate(60deg);
+  transform: rotate(90deg);
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease;
 }
 
 .home img {
@@ -477,12 +480,6 @@ select:focus {
 
 .admin-aco .toggle:hover {
   background-color: #dfe3e6;
-}
-
-.admin-aco .toggle .arrow {
-  display: inline-block;
-  margin-right: 0.5rem;
-  transition: transform 0.3s ease;
 }
 
 .admin-aco .toggle.active .arrow {

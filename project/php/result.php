@@ -20,6 +20,7 @@ $stmt = $pdo->prepare("
     SELECT 
         p.id AS progress_id,
         q.id AS quiz_id,
+        q.title,
         q.content,
         q.answer_index,
         c.choice_text,
@@ -56,9 +57,10 @@ $results = array_reverse($stmt->fetchAll());
     <?php include 'header.php'; ?>
     <main class="result-page">
         <?php foreach ($results as $index => $row): ?>
-            <div class="question">
+            <div class="question toggle">
                 <div class="result" onclick="toggleAccordion(this)">
-                    QUESTION<?= $index + 1 ?> <span class="arrow">▼</span>
+                    <?= htmlspecialchars($row['title']) ?>
+                    <span class="arrow">▶︎</span>
                     <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
                 </div>
                 <div class="problem-statement">
@@ -76,7 +78,7 @@ $results = array_reverse($stmt->fetchAll());
     <script src="../js/sidebar.js"></script>
     <script src="../js/mordol.js"></script>
     <script src="../js/button.js"></script>
-    <script src="../js/acoordion.js"></script>
+    <script src="../js/accordion.js"></script>
 </body>
 
 </html>

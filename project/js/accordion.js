@@ -6,15 +6,8 @@ function toggleAccordion(clickedElem) {
   arrow.classList.toggle("rotate");
 
   if (content.classList.contains("open")) {
-    arrow.textContent = "▲";
+    arrow.textContent = "▶︎";
   } else {
-    arrow.textContent = "▼";
+    arrow.textContent = "▶︎";
   }
 }
-
-document.body.addEventListener("click", (e) => {
-  const tog = e.target.closest(".toggle");
-  if (!tog) return;
-  document.querySelector(`.${tog.dataset.target}`)?.classList.toggle("open");
-  tog.classList.toggle("active");
-});
