@@ -229,6 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  //-------↓問題順番を入れ替える際に使用--------
+
   // ■ F: Sortable（既存そのまま）
   //   document.querySelectorAll(".aco-content").forEach((container) => {
   //     new Sortable(container, {

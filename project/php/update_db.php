@@ -4,26 +4,7 @@ header('Content-Type: application/json');
 
 // .env.php などを読み込む（例: require_once('.env.php');）
 // DB接続情報を.env.phpから取得
-require_once __DIR__ . '/.env.php';
-
-$host    = $db_host;
-$dbname  = $db_name;
-$user    = $db_user;
-$pass    = $db_pass;
-$charset = 'utf8mb4';
-$dsn     = "mysql:host={$host};dbname={$dbname};charset={$charset}";
-
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (PDOException $e) {
-    echo json_encode(["success" => false, "error" => "データベース接続エラー"]);
-    exit;
-}
+require_once __DIR__ . '/db_connect.php';
 
 $editType = $_POST['editType'] ?? null;
 if (!$editType) {

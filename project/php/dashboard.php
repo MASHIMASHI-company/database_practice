@@ -10,27 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     $_SESSION['user_id'] = 1;
 }
 
-// .env.php の読み込み
-require_once __DIR__ . '/.env.php';
-
-// DB接続情報を.env.phpから取得
-$host    = $db_host;
-$dbname  = $db_name;
-$user    = $db_user;
-$pass    = $db_pass;
-$charset = 'utf8mb4';
-$dsn     = "mysql:host={$host};dbname={$dbname};charset={$charset}";
-
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (PDOException $e) {
-    die("データベース接続に失敗しました: " . $e->getMessage());
-}
+require_once __DIR__ . '/db_connect.php';
 
 $user_id = $_SESSION['user_id'];
 
