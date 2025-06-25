@@ -4,10 +4,4 @@ function toggleAccordion(clickedElem) {
 
   content.classList.toggle("open");
   arrow.classList.toggle("rotate");
-
-  if (content.classList.contains("open")) {
-    arrow.textContent = "▶︎";
-  } else {
-    arrow.textContent = "▶︎";
-  }
 }
