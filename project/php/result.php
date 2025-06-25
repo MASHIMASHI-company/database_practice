@@ -59,9 +59,9 @@ $results = array_reverse($stmt->fetchAll());
         <?php foreach ($results as $index => $row): ?>
             <div class="question toggle">
                 <div class="result" onclick="toggleAccordion(this)">
-                    <?= htmlspecialchars($row['title']) ?>
                     <span class="arrow">▶︎</span>
                     <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
+                    <?= htmlspecialchars($row['title']) ?>
                 </div>
                 <div class="problem-statement">
                     <?= $row['content'] ?>
