@@ -37,6 +37,9 @@ $stmt->bindValue(2, $tag, PDO::PARAM_STR);
 $stmt->bindValue(3, (int)$totalQuestions, PDO::PARAM_INT);
 $stmt->execute();
 $results = array_reverse($stmt->fetchAll());
+
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
 ?>
 <!DOCTYPE html>
 <html>

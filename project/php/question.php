@@ -112,6 +112,9 @@ $correct   = (int)$stmtCorrect->fetch()['correct'];
 $levelText = "{$correct}/{$total}";
 
 $quiz_data_json = json_encode(array_values($quiz_data), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
 ?>
 
 <!DOCTYPE html>
