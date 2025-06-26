@@ -295,10 +295,28 @@ footer div {
   margin-bottom: 8rem;
 }
 .result {
-  font-size: clamp(2rem, 8vw, 5rem);
-  padding-left: 3rem;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  background-color: #eeeeee;
+  padding: 0.5rem 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   font-weight: bold;
-  line-height: 1.2;
+  border-radius: 10px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.result-gap {
+  margin-right: 1rem;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 
 .problem-statement {
@@ -309,6 +327,9 @@ footer div {
   padding: 0 1rem;
   border-left: 3px solid var(--base-color);
   margin-top: 0.5rem;
+  border-radius: 10px;
+  width: 85%;
+  margin: 1rem auto;
 }
 
 .problem-statement.open {
@@ -317,6 +338,7 @@ footer div {
 }
 
 .result-statement {
+  font-size: clamp(0.5rem, 8vw, 2rem);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease;
@@ -324,6 +346,13 @@ footer div {
   padding: 0 1rem;
   border-left: 3px solid var(--base-color);
   margin-top: 0.5rem;
+  border-radius: 10px;
+  width: 85%;
+  margin: 0.5rem auto;
+  height: 100%;
+}
+.result-statement.open {
+  padding: 1rem;
 }
 
 .arrow {
@@ -333,6 +362,7 @@ footer div {
   display: inline-block;
   cursor: pointer;
   margin-right: 0.5rem;
+  flex-shrink: 0;
 }
 
 .arrow.rotate {
@@ -464,7 +494,7 @@ select:focus {
   width: fit-content;
   align-self: flex-start;
   transition: background-color 0.3s ease;
-  margin-left: 90%;
+  margin-left: 80%;
 }
 
 .submit button:hover {
@@ -485,6 +515,11 @@ select:focus {
   border-radius: 4px;
   margin-top: 0.5rem;
   transition: background-color 0.2s ease;
+}
+
+.aco-description {
+  white-space: normal; /* 折り返しを許可する */
+  word-break: break-word; /* 長い単語でも適宜改行 */
 }
 
 .admin-aco .toggle:hover {
@@ -610,7 +645,6 @@ select:focus {
 #edit-answer-fields .answer-field input {
   flex: 1;
   padding: 0.4rem;
-  margin: 0.8rem auto auto auto;
 }
 
 /* 削除ボタン（編集モーダル内） */
@@ -619,14 +653,12 @@ select:focus {
   color: white;
   border: none;
   padding: 0.3rem 0.6rem;
-  margin: 0.8rem auto auto auto;
   border-radius: 4px;
   cursor: pointer;
 }
 
 /* 追加ボタン（編集モーダル内） */
 .edit-add-btn {
-  margin-top: 0.8rem;
   background-color: var(--base-color);
   color: var(--sub-color);
   border: none;
@@ -634,10 +666,59 @@ select:focus {
   border-radius: 6px;
   font-size: 0.9rem;
   cursor: pointer;
+  margin: 0 auto;
+  display: flex;
+}
+
+/* 1. 各フィールドを包んでいる flex コンテナに wrap を許可 */
+#edit-answer-fields .answer-field {
+  display: flex; /* 既存 */
+  flex-wrap: wrap; /* ← ここを追加 */
+  align-items: center; /* 既存 */
+  gap: 0.5rem; /* 任意: 子要素間の余白 */
+}
+
+/* 2. モバイル幅（600px以下）のとき、テキスト入力だけ全幅にして次の行へ */
+@media (max-width: 600px) {
+  /* テキスト input を次の行／全幅に */
+  #edit-answer-fields .answer-field input[type="text"] {
+    flex: 1 1 100%; /* 幅100% */
+    min-width: 0; /* はみ出し防止 */
+    margin-top: 0; /* 上に少し余白 */
+  }
+  /* (必要なら) 削除ボタンは折り返さずラジオ横に残す */
+  #edit-answer-fields .answer-field .remove-btn {
+    flex: 0 0 auto;
+  }
+}
+
+/* 3. モーダル本体の横スクロールを隠す */
+#editOverlay .edit-modal {
+  /* もともと overflow:scroll だったところを */
+  overflow-y: auto; /* 縦スクロールのみ */
+  overflow-x: hidden; /* 横スクロールは出さない */
 }
 
 .edit-add-btn:hover {
   background-color: #00b398;
+}
+
+.edit-modal input,
+.edit-modal textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.edit-modal input:focus,
+.edit-modal textarea:focus {
+  border: 1.3px solid var(--base-color);
+  outline: none;
+}
+
+input[type="radio"] {
+  accent-color: var(--base-color);
 }
 
 /* 送信ボタン */
@@ -703,12 +784,13 @@ select:focus {
 
 .edit-modal {
   background-color: var(--sub-color);
-  padding: 1rem 4rem;
-  width: 40%;
+  padding: 1rem 1rem;
+  width: 80%;
   border-radius: 5px;
   margin: 0 auto;
   overflow: scroll;
   height: 90%;
+  max-width: 80%;
 }
 
 #edit-description {
@@ -717,8 +799,8 @@ select:focus {
 
 .custom-close-btn {
   position: absolute;
-  top: 10%;
-  left: 70%;
+  top: 5%;
+  left: 80%;
   width: 10px;
 }
 
@@ -904,11 +986,18 @@ select:focus {
     text-align: left;
   }
   .result {
-    font-size: 2rem;
-    padding-left: 2rem;
+    font-size: 1.2rem;
+    padding: 1rem 0.5rem;
     font-weight: bold;
     letter-spacing: 0.2rem;
     line-height: 1.2;
+    width: 85%;
+    margin: 0 auto;
+  }
+  .result-statement {
+    font-size: 1.1rem;
+    width: 80%;
+    margin: 0.5rem auto;
   }
   .modal-content {
     width: 70%;

@@ -135,12 +135,23 @@ foreach ($rows as $r) {
   $groups[$t][$r['qid']]['choices'][] = $r['choice_text'];
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
 <head>
   <!-- <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Potta+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-<?php include 'header.php'; ?>
+  <header>
+    <a href="#"><img src="../image/1c5a6078-b57d-47e9-b234-2022e121fab6.png"></a>
+    <a href="#"><div>MASHIMASHI COMPANY</div></a>
+  </header>
 
 <main class="admin">
   <!-- ADD フォーム -->
@@ -162,12 +173,12 @@ foreach ($rows as $r) {
         <div>ANSWER</div>
         <div id="answer-form">
           <div class="answer-field">
-            <label>Answer.1:</label>
+            <label class="answer-num">Answer.1:</label>
             <input type="text" name="add-answer[]" required>
             <button type="button" class="remove-btn">削除</button>
           </div>
           <div class="answer-field">
-            <label>Answer.2:</label>
+            <label class="answer-num">Answer.2:</label>
             <input type="text" name="add-answer[]" required>
             <button type="button" class="remove-btn">削除</button>
           </div>

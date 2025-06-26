@@ -114,9 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const div = document.createElement("div");
         div.className = "answer-field";
         div.innerHTML = `
-            <label>Answer.${cnt}:</label>
+            <label>Answer.${cnt}:</label><button type="button" class="remove-btn">削除</button>
             <input type="text" name="edit-answer[]" required>
-            <button type="button" class="remove-btn">削除</button>`;
+            `;
         editWrap.appendChild(div);
         attachEditRadio(div, cnt - 1);
       }
@@ -176,9 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 2) 先頭の改行・空白を消した一行文字列で innerHTML に渡す
         div.innerHTML =
-          `<label>Answer.${i + 1}:</label>` +
-          `<input type="text" name="edit-answer[]" value="${text}" required>` +
-          `<button type="button" class="remove-btn">削除</button>`;
+          `<label>Answer.${
+            i + 1
+          }:</label><button type="button" class="remove-btn">削除</button>` +
+          `<input type="text" name="edit-answer[]" value="${text}" required>`;
 
         editWrap.appendChild(div);
         attachEditRadio(div, i, i === correctIdx);
