@@ -52,14 +52,28 @@ $email = $_SESSION['email'];
             <div class="level"><?php echo htmlspecialchars($levelText, ENT_QUOTES, 'UTF-8'); ?></div>
         </div>
         <div class="buttons">
-            <div class="button">
-                <a href="question.php?tag=HTML">HTML</a>
+            <div class="button dashboard-card">
+                <a href="question.php?tag=HTML">
+                    <img src="../image/dog-html.jpg" alt="html" class="logo-image">
+                    <div class="card-title">HTML</div>
+                    <div class="card-description">Webページの「土台」を作る言語。見出しや文章、画像などを並べて、ページの中身を決めます。いわばWebサイトの設計図です。</div>
+                </a>
             </div>
-            <div class="button">
-                <a href="question.php?tag=CSS">CSS</a>
+            <div class="button dashboard-card">
+                <a href="question.php?tag=CSS">
+                <img src="../image/rakko-css.jpg" alt="css" class="logo-image">
+                    <div class="card-title">CSS</div>
+                    <div class="card-description">HTMLで作ったページを「オシャレ」にする言語。色や文字サイズ、配置などを変えて、見やすく整えます。服を着せるようなイメージです。</div>
+
+                </a>
             </div>
-            <div class="button">
-                <a href="question.php?tag=JavaScript">JavaScript</a>
+            <div class="button dashboard-card">
+                <a href="question.php?tag=JavaScript">
+                <img src="../image/howel-js.jpg" alt="js" class="logo-image">
+                    <div class="card-title">JavaScript</div>
+                    <div class="card-description">ボタンを押したら動く、表示が変わるなど、ページに「動き」や「反応」をつける言語。Webページをもっと便利にしてくれます。</div>
+
+                </a>
             </div>
         </div>
     </main>
