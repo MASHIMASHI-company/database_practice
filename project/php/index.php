@@ -116,12 +116,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz App</title>
   <link rel="icon" href="../image/icon.png">
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Potta+One&display=swap" rel="stylesheet">
 </head>
 <body class="no-scroll">
-  <?php include 'header.php'; ?>
+  <header>
+    <a href="dashboard.php"><img src="../image/1c5a6078-b57d-47e9-b234-2022e121fab6.png"></a>
+    <a href="dashboard.php"><div>MASHIMASHI COMPANY</div></a>
+  </header>
 
   <main class="hero">
     <div class="left">

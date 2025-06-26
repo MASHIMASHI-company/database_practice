@@ -63,8 +63,9 @@ $email = $_SESSION['email'];
             <div class="question toggle">
                 <div class="result" onclick="toggleAccordion(this)">
                     <span class="arrow">▶︎</span>
-                    <?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?>
-                    <?= htmlspecialchars($row['title']) ?>
+                    <span class="text">
+                        <span class="result-gap"><?= ($row['index_number'] == $row['answer_index']) ? '○' : '×' ?></span><?= htmlspecialchars($row['title']) ?>
+                    </span>
                 </div>
                 <div class="result-statement">
                     <?= $row['content'] ?>
