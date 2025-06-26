@@ -705,7 +705,7 @@ select:focus {
 
 .edit-modal input,
 .edit-modal textarea {
-  width: 100%;
+  width: 98%;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -794,7 +794,7 @@ input[type="radio"] {
 }
 
 #edit-description {
-  width: 100%;
+  width: 98%;
 }
 
 .custom-close-btn {
@@ -1011,5 +1011,12 @@ input[type="radio"] {
   }
   .options {
     grid-template-columns: 1fr;
+  }
+  #edit-description {
+    width: 95%;
+  }
+  .edit-modal input,
+  .edit-modal textarea {
+    width: 95%;
   }
 }
