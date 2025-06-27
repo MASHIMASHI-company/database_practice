@@ -124,6 +124,7 @@ $email = $_SESSION['email'];
     <title>Dashboard - <?php echo htmlspecialchars($quiz_tag); ?></title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/question.css">
     <link rel="stylesheet" href="../css/prism-okaidia.css">
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>

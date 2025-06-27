@@ -6,7 +6,7 @@ $username = $_SESSION["username"];
     <head> 
         <meta charset="utf-8"> 
         <title>dashboard</title>
-        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/footer.css">
     </head>
     <body>  
         <footer>
