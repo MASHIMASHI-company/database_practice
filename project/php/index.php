@@ -18,7 +18,7 @@ if (isset($_GET['checkDuplicate'])) {
     exit();
 }
 
-// POST送信された場合
+// ----- POST送信処理 -----
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
   if (!isset($_POST['csrf_token'], $_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     $_SESSION["error"] = "不正なアクセスが検出されました。";
@@ -74,7 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     } elseif ($_POST['action'] === 'signin') {
         $username = trim($_POST["username"]);
         $password = $_POST["password"];
-
         $stmt = $pdo->prepare("SELECT id, username, email, password_hash FROM users WHERE username = ?");
         $stmt->execute([$username]);
         $user = authenticateUser($pdo, $username, $password);
@@ -93,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 
       <form id="formSignIn" method="POST" action="">
         <input type="hidden" name="action" value="signin">
-        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
         <label for="signin-username">Username:</label>
         <input type="text" id="signin-username" name="username" required>
         <br>
@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
       
       <form id="formSignUp" method="POST" action="">
         <input type="hidden" name="action" value="signup">
-        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
         <label for="signup-username">Username:</label>
         <input type="text" id="signup-username" name="username" required>
         <label for="signup-email">Email:</label>
@@ -192,10 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     </div>
   </div>
 
-  <!-- JavaScript: モーダルの開閉・エラーメッセージ非表示、フォームリセット、パスワードチェック、Ajax 重複チェック -->
   <script src="../js/signin.js"></script>
-  
-  <!-- ※ エラー情報はリダイレクト後に unset されるため、リロード時にモーダルが自動表示されることはありません -->
   
 </body>
 </html>
