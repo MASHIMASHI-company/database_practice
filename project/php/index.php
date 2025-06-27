@@ -2,40 +2,46 @@
 session_start();
 require_once __DIR__ . '/db_connect.php';
 
-// ----- Ajax用の重複チェック処理 -----
-// GETパラメータに "checkDuplicate" が含まれている場合、ユーザー名・メールアドレスの重複チェックを行い JSON を返す
+// --- CSRFトークン生成 ---
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// ----- Ajax重複チェック処理 -----
 if (isset($_GET['checkDuplicate'])) {
     $response = [
         'usernameExists' => false,
         'emailExists'    => false,
     ];
-
     if (isset($_GET['username']) && $_GET['username'] !== "") {
-        $username = trim($_GET['username']);
         $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
-        $stmt->execute([$username]);
+        $stmt->execute([trim($_GET['username'])]);
         if ($stmt->fetch(PDO::FETCH_ASSOC)) {
             $response['usernameExists'] = true;
         }
     }
-
     if (isset($_GET['email']) && $_GET['email'] !== "") {
-        $email = trim($_GET['email']);
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->execute([$email]);
+        $stmt->execute([trim($_GET['email'])]);
         if ($stmt->fetch(PDO::FETCH_ASSOC)) {
             $response['emailExists'] = true;
         }
     }
-
     header('Content-Type: application/json');
     echo json_encode($response);
     exit();
 }
-// ----- Ajax用の重複チェック処理 終了 -----
 
-// POST送信された場合
+// ----- POST送信処理 -----
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
+    // --- CSRFトークン検証 ---
+    if (!isset($_POST['csrf_token'], $_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $_SESSION["error"] = "不正なアクセスが検出されました。";
+        $_SESSION["action"] = $_POST['action'];
+        header("Location: index.php");
+        exit();
+    }
+
     if ($_POST['action'] === 'signup') {
         $username  = trim($_POST["username"]);
         $email     = trim($_POST["email"]);
@@ -53,17 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
             header("Location: index.php");
             exit();
         } else {
-            // サーバー側で重複チェック
             $stmt = $pdo->prepare("SELECT username, email FROM users WHERE username = ? OR email = ?");
             $stmt->execute([$username, $email]);
             $existing = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($existing) {
                 $errMsg = "";
-                if (isset($existing['username']) && $existing['username'] === $username) {
+                if ($existing['username'] === $username) {
                     $errMsg .= "そのユーザー名は使用されています";
                 }
-                if (isset($existing['email']) && $existing['email'] === $email) {
+                if ($existing['email'] === $email) {
                     $errMsg .= (empty($errMsg) ? "" : "<br>") . "そのメールアドレスは使用されています";
                 }
                 $_SESSION["error"] = $errMsg;
@@ -75,8 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
                 try {
                     $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
                     $stmt->execute([$username, $email, $password_hash]);
-
-                    // 登録成功後は自動ログインしてダッシュボードへリダイレクト
                     $_SESSION["user_id"] = $pdo->lastInsertId();
                     $_SESSION["username"] = $username;
                     $_SESSION["email"] = $email;
@@ -93,7 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     } elseif ($_POST['action'] === 'signin') {
         $username = trim($_POST["username"]);
         $password = $_POST["password"];
-
         $stmt = $pdo->prepare("SELECT id, username, email, password_hash FROM users WHERE username = ?");
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -112,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,6 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 
       <form id="formSignIn" method="POST" action="">
         <input type="hidden" name="action" value="signin">
+         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
         <label for="signin-username">Username:</label>
         <input type="text" id="signin-username" name="username" required>
         <br>
@@ -195,6 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
       
       <form id="formSignUp" method="POST" action="">
         <input type="hidden" name="action" value="signup">
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
         <label for="signup-username">Username:</label>
         <input type="text" id="signup-username" name="username" required>
         <label for="signup-email">Email:</label>
@@ -209,10 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     </div>
   </div>
 
-  <!-- JavaScript: モーダルの開閉・エラーメッセージ非表示、フォームリセット、パスワードチェック、Ajax 重複チェック -->
   <script src="../js/signin.js"></script>
-  
-  <!-- ※ エラー情報はリダイレクト後に unset されるため、リロード時にモーダルが自動表示されることはありません -->
   
 </body>
 </html>

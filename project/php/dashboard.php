@@ -2,13 +2,8 @@
 // dashboard.php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-session_start();
-
-// ログインしていない場合の処理（今回はデモ用にユーザーIDを1に設定）
-// ※ 本番環境では適切な認証処理を実装してください。
-if (!isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 1;
-}
+    require_once 'auth.php';
+    login_required();
 
 require_once __DIR__ . '/db_connect.php';
 
