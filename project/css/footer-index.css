@@ -1,0 +1,57 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px; /* お好みで調整 */
+  overflow: hidden; /* 草のはみ出しを隠す */
+  background: transparent;
+  z-index: 998;
+}
+
+/* シルエット部分 */
+footer .grass {
+  position: absolute;
+  bottom: 0;
+  left: -50%; /* 広く引き延ばして揺れ余裕を確保 */
+  width: 200%;
+  height: 150%;
+  background-color: var(--base-color);
+  /* 上辺を草むらシルエットに */
+  clip-path: polygon(
+    0% 100%,
+    5% 85%,
+    10% 95%,
+    15% 80%,
+    20% 90%,
+    25% 70%,
+    30% 85%,
+    35% 75%,
+    40% 90%,
+    45% 80%,
+    50% 95%,
+    55% 75%,
+    60% 85%,
+    65% 70%,
+    70% 80%,
+    75% 90%,
+    80% 85%,
+    85% 95%,
+    90% 75%,
+    95% 85%,
+    100% 100%
+  );
+  transform-origin: bottom center;
+  animation: sway 6s ease-in-out infinite;
+}
+
+/* ゆらぎアニメーション */
+@keyframes sway {
+  0%,
+  100% {
+    transform: translateX(0) skewX(0deg);
+  }
+  50% {
+    transform: translateX(-25%) skewX(1.5deg);
+  }
+}
