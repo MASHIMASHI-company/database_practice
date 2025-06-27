@@ -1,0 +1,413 @@
+.admin {
+  color: var(--base-color);
+  width: 80%;
+  margin: 70px auto;
+  padding: 2rem 2rem 0 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.add,
+.answer {
+  margin-bottom: 1rem;
+}
+
+.answer-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.answer-field input {
+  flex: 1;
+  padding: 0.4rem;
+}
+
+.remove-btn {
+  background-color: var(--base-color);
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#add-answer-btn {
+  margin-top: 0.5rem;
+  margin-left: 45%;
+  padding: 0.4rem 0.8rem;
+  background-color: var(--base-color);
+  color: var(--sub-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add div,
+.answer div {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.admin form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin label {
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+.admin input[type="text"],
+.admin select {
+  width: 80%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.admin select {
+  width: 40%;
+}
+.add option:hover {
+  background-color: var(--base-color);
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: var(--base-color);
+  outline: none;
+}
+
+.submit button {
+  padding: 0.4rem 1rem;
+  background-color: var(--base-color);
+  color: var(--sub-color);
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: fit-content;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+  margin-left: 80%;
+}
+
+.submit button:hover {
+  background-color: #00b348;
+}
+
+.admin-aco {
+  margin: 0 auto 7rem auto;
+  width: 90%;
+}
+.admin-aco .toggle {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.aco-description {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.admin-aco .toggle:hover {
+  background-color: #dfe3e6;
+}
+
+.admin-aco .toggle.active .arrow {
+  transform: rotate(90deg);
+}
+
+.aco-content {
+  position: relative;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
+  background-color: #f0f0f0;
+  border-left: 4px solid var(--base-color);
+  border-radius: 6px;
+}
+
+.aco-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+  background-color: var(--base-color);
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #138496;
+}
+
+.delete-btn {
+  background-color: var(--base-color);
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #138496;
+}
+
+#editOverlay {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-modal {
+  background-color: var(--sub-color);
+  color: var(--base-color);
+  border: 1px solid var(--base-color);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.custom-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.custom-close-btn:hover {
+  color: #000;
+}
+
+.custom-modal input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.custom-modal label {
+  font-weight: bold;
+  display: block;
+  margin-top: 1rem;
+}
+
+#edit-answer-fields .answer-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+#edit-answer-fields .answer-field input {
+  flex: 1;
+  padding: 0.4rem;
+}
+
+#edit-answer-fields .remove-btn {
+  background-color: var(--base-color);
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-add-btn {
+  background-color: var(--base-color);
+  color: var(--sub-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin: 0 auto;
+  display: flex;
+}
+
+#editOverlay .edit-modal {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.edit-add-btn:hover {
+  background-color: #00b398;
+}
+
+.edit-modal input,
+.edit-modal textarea {
+  width: 98%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.edit-modal input:focus,
+.edit-modal textarea:focus {
+  border: 1.3px solid var(--base-color);
+  outline: none;
+}
+
+input[type="radio"] {
+  accent-color: var(--base-color);
+}
+
+.custom-modal .submit-btn {
+  margin-top: 1rem;
+  background-color: var(--base-color);
+  color: var(--sub-color);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.submit-modal {
+  margin-top: 1rem;
+  background-color: var(--base-color);
+  color: var(--sub-color);
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.custom-modal .submit-btn:hover,
+.submit-modal:hover {
+  background-color: #00b398;
+}
+
+.aco-item {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+.aco-answers li {
+  margin-left: 20px;
+}
+
+.aco-content {
+  display: none;
+}
+
+.aco-content.open {
+  display: block;
+}
+
+.toggle.active .arrow {
+  transform: rotate(90deg);
+}
+
+.drag-handle {
+  cursor: grab;
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.edit-modal {
+  background-color: var(--sub-color);
+  padding: 1rem 1rem;
+  width: 80%;
+  border-radius: 5px;
+  margin: 0 auto;
+  overflow: scroll;
+  height: 90%;
+  max-width: 80%;
+}
+
+#edit-description {
+  width: 98%;
+}
+
+.custom-close-btn {
+  position: absolute;
+  top: 5%;
+  left: 80%;
+  width: 10px;
+}
+
+.modal-update {
+  margin-right: 1rem;
+}
+
+@media (max-width: 600px) {
+  #edit-answer-fields .answer-field input[type="text"] {
+    flex: 1 1 100%;
+    min-width: 0;
+    margin-top: 0;
+  }
+
+  #edit-answer-fields .answer-field .remove-btn {
+    flex: 0 0 auto;
+  }
+
+  .modal-content {
+    width: 70%;
+    max-width: 250px;
+  }
+  .submit button {
+    margin-left: 75%;
+  }
+
+  #edit-description {
+    width: 95%;
+  }
+
+  .edit-modal input,
+  .edit-modal textarea {
+    width: 95%;
+  }
+}

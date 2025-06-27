@@ -101,6 +101,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
   <title>Quiz App</title>
   <link rel="icon" href="../image/icon.png">
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/footer-index.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Potta+One&display=swap" rel="stylesheet">
@@ -124,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
   </main>
   
   <footer>
-    <div></div>
+    <div class="grass"></div>
   </footer>
 
   <!-- Sign In モーダル -->

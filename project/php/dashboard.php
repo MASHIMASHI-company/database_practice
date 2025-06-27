@@ -38,6 +38,7 @@ $email = $_SESSION['email'];
     <title>Dashboard</title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
     <?php include 'header.php'; ?>
