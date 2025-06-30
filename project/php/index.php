@@ -1,32 +1,18 @@
 <?php
 session_start();
 require_once __DIR__ . '/db_connect.php';
-
-// --- CSRFトークン生成 ---
+require_once __DIR__ . '/auth.php';
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// ----- Ajax重複チェック処理 -----
+// Ajax重複チェック
 if (isset($_GET['checkDuplicate'])) {
-    $response = [
-        'usernameExists' => false,
-        'emailExists'    => false,
-    ];
-    if (isset($_GET['username']) && $_GET['username'] !== "") {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
-        $stmt->execute([trim($_GET['username'])]);
-        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
-            $response['usernameExists'] = true;
-        }
-    }
-    if (isset($_GET['email']) && $_GET['email'] !== "") {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->execute([trim($_GET['email'])]);
-        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
-            $response['emailExists'] = true;
-        }
-    }
+    $username = isset($_GET['username']) ? trim($_GET['username']) : "";
+    $email = isset($_GET['email']) ? trim($_GET['email']) : "";
+
+    $response = ajaxCheckDuplicate($pdo, $username, $email);
+
     header('Content-Type: application/json');
     echo json_encode($response);
     exit();
@@ -34,13 +20,12 @@ if (isset($_GET['checkDuplicate'])) {
 
 // ----- POST送信処理 -----
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
-    // --- CSRFトークン検証 ---
-    if (!isset($_POST['csrf_token'], $_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        $_SESSION["error"] = "不正なアクセスが検出されました。";
-        $_SESSION["action"] = $_POST['action'];
-        header("Location: index.php");
-        exit();
-    }
+  if (!isset($_POST['csrf_token'], $_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    $_SESSION["error"] = "不正なアクセスが検出されました。";
+    $_SESSION["action"] = $_POST['action'] ?? '';
+    header("Location: index.php");
+    exit();
+  }
 
     if ($_POST['action'] === 'signup') {
         $username  = trim($_POST["username"]);
@@ -48,58 +33,51 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
         $password  = $_POST["password"];
         $password2 = $_POST["password2"];
 
-        if ($password !== $password2) {
-            $_SESSION["error"] = "パスワードが一致しません";
-            $_SESSION["action"] = "signup";
-            header("Location: index.php");
-            exit();
-        } elseif (strlen($password) < 5) {
-            $_SESSION["error"] = "パスワードは5文字以上でなければなりません";
-            $_SESSION["action"] = "signup";
-            header("Location: index.php");
-            exit();
-        } else {
-            $stmt = $pdo->prepare("SELECT username, email FROM users WHERE username = ? OR email = ?");
-            $stmt->execute([$username, $email]);
-            $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+        $errors = validateSignUpData($username, $email, $password, $password2);
 
-            if ($existing) {
-                $errMsg = "";
-                if ($existing['username'] === $username) {
-                    $errMsg .= "そのユーザー名は使用されています";
-                }
-                if ($existing['email'] === $email) {
-                    $errMsg .= (empty($errMsg) ? "" : "<br>") . "そのメールアドレスは使用されています";
-                }
-                $_SESSION["error"] = $errMsg;
-                $_SESSION["action"] = "signup";
-                header("Location: index.php");
-                exit();
-            } else {
-                $password_hash = password_hash($password, PASSWORD_DEFAULT);
-                try {
-                    $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
-                    $stmt->execute([$username, $email, $password_hash]);
-                    $_SESSION["user_id"] = $pdo->lastInsertId();
-                    $_SESSION["username"] = $username;
-                    $_SESSION["email"] = $email;
-                    header("Location: dashboard.php");
-                    exit();
-                } catch (PDOException $e) {
-                    $_SESSION["error"] = "登録に失敗しました: " . $e->getMessage();
-                    $_SESSION["action"] = "signup";
-                    header("Location: index.php");
-                    exit();
-                }
+        if (!empty($errors)) {
+            $_SESSION["error"] = implode("<br>", $errors);
+            $_SESSION["action"] = "signup";
+            header("Location: index.php");
+            exit();
+        }
+
+        $existing = checkDuplicateUser($pdo, $username, $email);
+        if ($existing) {
+            $errMsg = "";
+            if (isset($existing['username']) && $existing['username'] === $username) {
+                $errMsg .= "そのユーザー名は使用されています";
             }
+            if (isset($existing['email']) && $existing['email'] === $email) {
+                $errMsg .= (empty($errMsg) ? "" : "<br>") . "そのメールアドレスは使用されています";
+            }
+            $_SESSION["error"] = $errMsg;
+            $_SESSION["action"] = "signup";
+            header("Location: index.php");
+            exit();
+        }
+
+        try {
+            $userId = registerUser($pdo, $username, $email, $password);
+
+            $_SESSION["user_id"] = $userId;
+            $_SESSION["username"] = $username;
+            $_SESSION["email"] = $email;
+            header("Location: dashboard.php");
+            exit();
+        } catch (PDOException $e) {
+            $_SESSION["error"] = "登録に失敗しました: " . $e->getMessage();
+            $_SESSION["action"] = "signup";
+            header("Location: index.php");
+            exit();
         }
     } elseif ($_POST['action'] === 'signin') {
         $username = trim($_POST["username"]);
         $password = $_POST["password"];
         $stmt = $pdo->prepare("SELECT id, username, email, password_hash FROM users WHERE username = ?");
         $stmt->execute([$username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($password, $user["password_hash"])) {
+        $user = authenticateUser($pdo, $username, $password);
+        if ($user) {
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["username"] = $user["username"];
             $_SESSION["email"] = $user["email"];
